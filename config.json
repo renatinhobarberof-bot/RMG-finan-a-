@@ -1,0 +1,189 @@
+{
+  "app": {
+    "name": "RMG Finança",
+    "shortName": "RMG",
+    "description": "Gestão Financeira Inteligente com IA",
+    "version": "1.0.0",
+    "author": "Manus AI",
+    "license": "MIT"
+  },
+  "design": {
+    "colors": {
+      "primary": "#1abc9c",
+      "primaryDark": "#0a9373",
+      "background": "#141423",
+      "card": "#1a1a2e",
+      "border": "rgba(26, 188, 156, 0.1)",
+      "text": "#e5e7eb",
+      "textMuted": "#9ca3af",
+      "success": "#10b981",
+      "error": "#ef4444",
+      "warning": "#f59e0b"
+    },
+    "typography": {
+      "fontFamily": "'Plus Jakarta Sans', system-ui, sans-serif",
+      "fontSize": {
+        "xs": "10px",
+        "sm": "12px",
+        "base": "14px",
+        "lg": "16px",
+        "xl": "18px",
+        "2xl": "20px",
+        "3xl": "28px",
+        "4xl": "32px",
+        "5xl": "36px"
+      }
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "2xl": "24px",
+      "3xl": "32px"
+    },
+    "borderRadius": {
+      "sm": "8px",
+      "md": "12px",
+      "lg": "16px",
+      "xl": "20px",
+      "2xl": "24px"
+    }
+  },
+  "categories": [
+    {
+      "id": "food",
+      "name": "Alimentação",
+      "icon": "🍽️",
+      "color": "#f59e0b",
+      "type": "expense"
+    },
+    {
+      "id": "transport",
+      "name": "Transporte",
+      "icon": "🚗",
+      "color": "#3b82f6",
+      "type": "expense"
+    },
+    {
+      "id": "entertainment",
+      "name": "Lazer",
+      "icon": "🎬",
+      "color": "#ec4899",
+      "type": "expense"
+    },
+    {
+      "id": "shopping",
+      "name": "Compras",
+      "icon": "🛍️",
+      "color": "#8b5cf6",
+      "type": "expense"
+    },
+    {
+      "id": "utilities",
+      "name": "Contas",
+      "icon": "💡",
+      "color": "#14b8a6",
+      "type": "expense"
+    },
+    {
+      "id": "health",
+      "name": "Saúde",
+      "icon": "⚕️",
+      "color": "#ef4444",
+      "type": "expense"
+    },
+    {
+      "id": "salary",
+      "name": "Salário",
+      "icon": "💰",
+      "color": "#10b981",
+      "type": "income"
+    },
+    {
+      "id": "freelance",
+      "name": "Freelance",
+      "icon": "💼",
+      "color": "#06b6d4",
+      "type": "income"
+    },
+    {
+      "id": "investment",
+      "name": "Investimento",
+      "icon": "📈",
+      "color": "#1abc9c",
+      "type": "income"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "budget-food",
+      "categoryId": "food",
+      "limit": 600,
+      "alert": 80
+    },
+    {
+      "id": "budget-transport",
+      "categoryId": "transport",
+      "limit": 300,
+      "alert": 80
+    },
+    {
+      "id": "budget-entertainment",
+      "categoryId": "entertainment",
+      "limit": 400,
+      "alert": 80
+    }
+  ],
+  "goals": [
+    {
+      "id": "goal-emergency",
+      "name": "Fundo de Emergência",
+      "target": 10000,
+      "current": 5000,
+      "deadline": "2026-12-31"
+    },
+    {
+      "id": "goal-vacation",
+      "name": "Férias",
+      "target": 5000,
+      "current": 1200,
+      "deadline": "2026-07-31"
+    },
+    {
+      "id": "goal-car",
+      "name": "Carro Novo",
+      "target": 50000,
+      "current": 8500,
+      "deadline": "2027-12-31"
+    }
+  ],
+  "settings": {
+    "theme": "dark",
+    "language": "pt-BR",
+    "currency": "BRL",
+    "currencySymbol": "R$",
+    "notifications": {
+      "enabled": true,
+      "budgetAlert": true,
+      "transactionReminder": true,
+      "goalUpdate": true
+    },
+    "privacy": {
+      "dataCollection": false,
+      "analytics": false,
+      "crashReports": false
+    }
+  },
+  "features": {
+    "offline": true,
+    "pwa": true,
+    "darkMode": true,
+    "notifications": true,
+    "export": true,
+    "import": true,
+    "backup": true,
+    "ai": true
+  }
+}
