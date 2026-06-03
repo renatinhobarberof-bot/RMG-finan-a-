@@ -1,1 +1,902 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#1abc9c" />
+    <meta name="description" content="RMG Finança - Gestão Financeira Inteligente com IA" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="RMG Finança" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>RMG Finança</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            background-color: #141423;
+            color-scheme: dark;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: #141423;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            min-height: 100dvh;
+            background: #141423;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            min-h-dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #141423;
+            position: relative;
+        }
+
+        .splash-screen.hidden {
+            display: none;
+        }
+
+        .splash-bg {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .splash-glow {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        .splash-glow-1 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #1abc9c 0%, transparent 70%);
+        }
+
+        .splash-glow-2 {
+            top: 25%;
+            right: 25%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #10b981 0%, transparent 70%);
+            opacity: 0.08;
+            animation: glow-pulse 4s ease-in-out infinite 0.3s;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { opacity: 0.08; }
+            50% { opacity: 0.15; }
+        }
+
+        .splash-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon-box {
+            width: 96px;
+            height: 96px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a3d2a, #082a1f);
+            border: 2px solid rgba(26, 188, 156, 0.3);
+            position: relative;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(26, 188, 156, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(26, 188, 156, 0.5); }
+        }
+
+        .icon-box span {
+            font-size: 48px;
+            font-weight: 900;
+            color: #1abc9c;
+            letter-spacing: -2px;
+        }
+
+        .icon-dot {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #1abc9c;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .splash-title {
+            text-align: center;
+            animation: fadeInUp 0.5s ease-out 0.5s both;
+        }
+
+        .splash-title h1 {
+            font-size: 32px;
+            font-weight: 900;
+            color: #1abc9c;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .splash-title p {
+            font-size: 14px;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+
+        .loading-dots {
+            position: absolute;
+            bottom: 64px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            animation: fadeInUp 0.5s ease-out 0.8s both;
+        }
+
+        .dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1abc9c;
+            animation: dotBounce 0.8s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes dotBounce {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.4); opacity: 1; }
+        }
+
+        .loading-text {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* Main App */
+        .app-content {
+            min-h-dvh;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-content.hidden {
+            display: none;
+        }
+
+        .header {
+            padding: 20px;
+            padding-top: max(20px, env(safe-area-inset-top));
+            background: #141423;
+            border-bottom: 1px solid rgba(26, 188, 156, 0.1);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #1abc9c;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .card {
+            background: #1a1a2e;
+            border: 1px solid rgba(26, 188, 156, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .card h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #e5e7eb;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #0a3d2a, #082a1f);
+            border: 1px solid rgba(26, 188, 156, 0.2);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(26, 188, 156, 0.1), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .balance-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .balance-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .balance-value {
+            font-size: 36px;
+            font-weight: 900;
+            color: #ffffff;
+            font-variant-numeric: tabular-nums;
+            margin-bottom: 20px;
+        }
+
+        .balance-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .balance-item {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 12px;
+        }
+
+        .balance-item-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+        }
+
+        .balance-item-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1abc9c;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: #1a1a2e;
+            border: 1px solid rgba(26, 188, 156, 0.1);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 900;
+            color: #1abc9c;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(26, 188, 156, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(26, 188, 156, 0.1);
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 188, 156, 0.15);
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 2px;
+        }
+
+        .feature-desc {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #1abc9c, #0a9373);
+            color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn:hover {
+            box-shadow: 0 8px 24px rgba(26, 188, 156, 0.3);
+        }
+
+        .btn-secondary {
+            background: #1a1a2e;
+            border: 1px solid rgba(26, 188, 156, 0.2);
+            color: #1abc9c;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            height: 80px;
+            padding-bottom: max(16px, env(safe-area-inset-bottom));
+            background: rgba(20, 20, 35, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(26, 188, 156, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            color: #9ca3af;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .nav-item.active {
+            color: #1abc9c;
+            background: rgba(26, 188, 156, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .empty-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #e5e7eb;
+            margin-bottom: 8px;
+        }
+
+        .empty-desc {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(26, 188, 156, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1abc9c, #0a9373);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #1a1a2e;
+            border: 1px solid rgba(26, 188, 156, 0.1);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .tx-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 188, 156, 0.15);
+            font-size: 20px;
+        }
+
+        .tx-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tx-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 2px;
+        }
+
+        .tx-date {
+            font-size: 11px;
+            color: #9ca3af;
+        }
+
+        .tx-amount {
+            font-weight: 700;
+            font-size: 13px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .tx-income {
+            color: #10b981;
+        }
+
+        .tx-expense {
+            color: #ef4444;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+
+            .bottom-nav {
+                max-width: 100%;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(26, 188, 156, 0.2);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(26, 188, 156, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Splash Screen -->
+        <div class="splash-screen" id="splashScreen">
+            <div class="splash-bg">
+                <div class="splash-glow splash-glow-1"></div>
+                <div class="splash-glow splash-glow-2"></div>
+            </div>
+            <div class="splash-content">
+                <div class="icon-box">
+                    <span>R</span>
+                    <div class="icon-dot"></div>
+                </div>
+                <div class="splash-title">
+                    <h1>RMG Finança</h1>
+                    <p>Gestão Financeira Inteligente</p>
+                </div>
+            </div>
+            <div class="loading-dots">
+                <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="loading-text">Carregando...</div>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div class="app-content hidden" id="appContent">
+            <div class="header">
+                <h1>RMG Finança</h1>
+                <p>Gestão Financeira Inteligente</p>
+            </div>
+
+            <div class="main">
+                <!-- Home Section -->
+                <section class="section active" id="homeSection">
+                    <div class="balance-card">
+                        <div class="balance-card-content">
+                            <div class="balance-label">Saldo Total</div>
+                            <div class="balance-value">R$ 12.450,00</div>
+                            <div class="balance-row">
+                                <div class="balance-item">
+                                    <div class="balance-item-label">Receitas</div>
+                                    <div class="balance-item-value">R$ 8.500</div>
+                                </div>
+                                <div class="balance-item">
+                                    <div class="balance-item-label">Despesas</div>
+                                    <div class="balance-item-value">R$ 3.200</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2>📊 Resumo do Mês</h2>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-label">Receita</div>
+                                <div class="stat-value">+R$ 8.5k</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">Despesa</div>
+                                <div class="stat-value">-R$ 3.2k</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">Economia</div>
+                                <div class="stat-value">+R$ 5.3k</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2>💳 Últimas Transações</h2>
+                        <div class="transaction-item">
+                            <div class="tx-icon">🍽️</div>
+                            <div class="tx-info">
+                                <div class="tx-name">Restaurante</div>
+                                <div class="tx-date">Hoje · 19:30</div>
+                            </div>
+                            <div class="tx-amount tx-expense">-R$ 85,00</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="tx-icon">💰</div>
+                            <div class="tx-info">
+                                <div class="tx-name">Salário</div>
+                                <div class="tx-date">Ontem · 09:00</div>
+                            </div>
+                            <div class="tx-amount tx-income">+R$ 5.000,00</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="tx-icon">🛍️</div>
+                            <div class="tx-info">
+                                <div class="tx-name">Compras</div>
+                                <div class="tx-date">2 dias atrás</div>
+                            </div>
+                            <div class="tx-amount tx-expense">-R$ 320,00</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transactions Section -->
+                <section class="section" id="transactionsSection">
+                    <div class="card">
+                        <h2>💸 Minhas Transações</h2>
+                        <button class="btn" onclick="alert('Clique em uma transação para editar')">+ Adicionar Transação</button>
+                        <div class="transaction-item">
+                            <div class="tx-icon">🍽️</div>
+                            <div class="tx-info">
+                                <div class="tx-name">Alimentação</div>
+                                <div class="tx-date">Restaurante Bella Italia</div>
+                            </div>
+                            <div class="tx-amount tx-expense">-R$ 85,00</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="tx-icon">🚗</div>
+                            <div class="tx-info">
+                                <div class="tx-name">Transporte</div>
+                                <div class="tx-date">Uber para trabalho</div>
+                            </div>
+                            <div class="tx-amount tx-expense">-R$ 32,50</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="tx-icon">💼</div>
+                            <div class="tx-info">
+                                <div class="tx-name">Freelance</div>
+                                <div class="tx-date">Projeto concluído</div>
+                            </div>
+                            <div class="tx-amount tx-income">+R$ 1.500,00</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Budget Section -->
+                <section class="section" id="budgetSection">
+                    <div class="card">
+                        <h2>📈 Orçamentos</h2>
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="font-size: 13px; color: #e5e7eb;">Alimentação</span>
+                                <span style="font-size: 13px; color: #9ca3af;">R$ 450 / R$ 600</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="font-size: 13px; color: #e5e7eb;">Transporte</span>
+                                <span style="font-size: 13px; color: #9ca3af;">R$ 180 / R$ 300</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="font-size: 13px; color: #e5e7eb;">Lazer</span>
+                                <span style="font-size: 13px; color: #9ca3af;">R$ 280 / R$ 400</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Insights Section -->
+                <section class="section" id="insightsSection">
+                    <div class="card">
+                        <h2>🤖 Insights com IA</h2>
+                        <div class="features">
+                            <div class="feature-item">
+                                <div class="feature-icon">💡</div>
+                                <div class="feature-text">
+                                    <div class="feature-title">Economia Detectada</div>
+                                    <div class="feature-desc">Você economizou 15% este mês comparado ao anterior</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">⚠️</div>
+                                <div class="feature-text">
+                                    <div class="feature-title">Alerta de Orçamento</div>
+                                    <div class="feature-desc">Você está próximo do limite em Alimentação (75%)</div>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎯</div>
+                                <div class="feature-text">
+                                    <div class="feature-title">Recomendação</div>
+                                    <div class="feature-desc">Considere reduzir gastos com lazer para atingir sua meta</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section class="section" id="settingsSection">
+                    <div class="card">
+                        <h2>⚙️ Configurações</h2>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <button class="btn btn-secondary" onclick="alert('Perfil: João Silva')">👤 Meu Perfil</button>
+                            <button class="btn btn-secondary" onclick="alert('Tema: Escuro')">🌙 Tema Escuro</button>
+                            <button class="btn btn-secondary" onclick="alert('Notificações: Ativadas')">🔔 Notificações</button>
+                            <button class="btn btn-secondary" onclick="alert('Segurança: Protegida')">🔒 Segurança</button>
+                            <button class="btn btn-secondary" onclick="alert('Versão 1.0.0')">ℹ️ Sobre o App</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <div class="bottom-nav">
+                <div class="nav-item active" onclick="switchSection('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div>Home</div>
+                </div>
+                <div class="nav-item" onclick="switchSection('transactions')">
+                    <div class="nav-icon">💳</div>
+                    <div>Transações</div>
+                </div>
+                <div class="nav-item" onclick="switchSection('budget')">
+                    <div class="nav-icon">📊</div>
+                    <div>Orçamento</div>
+                </div>
+                <div class="nav-item" onclick="switchSection('insights')">
+                    <div class="nav-icon">🤖</div>
+                    <div>IA</div>
+                </div>
+                <div class="nav-item" onclick="switchSection('settings')">
+                    <div class="nav-icon">⚙️</div>
+                    <div>Config</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Splash screen logic
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('splashScreen').classList.add('hidden');
+                document.getElementById('appContent').classList.remove('hidden');
+            }, 2200);
+        });
+
+        // Navigation logic
+        function switchSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            // Show selected section
+            const sectionMap = {
+                'home': 'homeSection',
+                'transactions': 'transactionsSection',
+                'budget': 'budgetSection',
+                'insights': 'insightsSection',
+                'settings': 'settingsSection'
+            };
+            
+            document.getElementById(sectionMap[sectionName]).classList.add('active');
+            
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        // Service Worker registration for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:application/javascript,self.addEventListener("install",e=>self.skipWaiting());self.addEventListener("activate",e=>e.waitUntil(clients.claim()));').catch(() => {});
+        }
+
+        // Install prompt for PWA
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+    </script>
+</body>
+</html>
